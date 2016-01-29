@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using MigrateFromSvnToGit;
+using MigrateFromSvnToGit.Core;
 using NUnit.Framework;
 
 namespace Test.Core {

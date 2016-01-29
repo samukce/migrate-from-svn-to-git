@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MigrateFromSvnToGit.Exceptions {
+namespace MigrateFromSvnToGit.Core.Exceptions {
     public class ExecuteFileNotFoundException : Exception {
         private const string MessageFormat = "File execute {0} not found.";
 

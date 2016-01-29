@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using MigrateFromSvnToGit.Exceptions;
-using MigrateFromSvnToGit.Interfaces;
+using MigrateFromSvnToGit.Core.Exceptions;
+using MigrateFromSvnToGit.Core.Interfaces;
 
-namespace MigrateFromSvnToGit {
+namespace MigrateFromSvnToGit.Core {
     public class ProcessCaller : IProcessCaller {
         private const int MillisecondsTimeout = 1000 * 60 * 5;
 

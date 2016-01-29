@@ -2,7 +2,8 @@
 using System.ComponentModel;
 using System.IO;
 using MigrateFromSvnToGit;
-using MigrateFromSvnToGit.Exceptions;
+using MigrateFromSvnToGit.Core;
+using MigrateFromSvnToGit.Core.Exceptions;
 using NUnit.Framework;
 
 namespace Test.Core {
