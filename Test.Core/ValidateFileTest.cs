@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using MigrateFromSvnToGit;
 using NUnit.Framework;
 
@@ -15,6 +16,14 @@ namespace Test.Core {
         [Test]
         public void ShouldReturnFalseWhenFileDoesNotExist() {
             Assert.That(new ValidateFile().Exist("fileDoesNotExist.txt"), Is.False);
+        }
+
+        [TestCase("")]
+        [TestCase(" ")]
+        [TestCase(null)]
+        [ExpectedException(typeof(ArgumentException))]
+        public void WhenNotInformedPathShouldThrowArgumentException(string fullPath) {
+            new ValidateFile().Exist(fullPath);
         }
     }
 }
