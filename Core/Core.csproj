@@ -45,9 +45,11 @@
     <Compile Include="CreateBareGit.cs" />
     <Compile Include="CreateCloneGit.cs" />
     <Compile Include="Exceptions\ExecuteFileNotFoundException.cs" />
+    <Compile Include="Exceptions\FileUsersNotFoundException.cs" />
     <Compile Include="Interfaces\ICreateBareGit.cs" />
     <Compile Include="Interfaces\ICreateCloneGit.cs" />
     <Compile Include="Interfaces\IProcessCaller.cs" />
+    <Compile Include="Interfaces\IValidateFile.cs" />
     <Compile Include="MigrationOrchestrator.cs" />
     <Compile Include="ProcessCaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

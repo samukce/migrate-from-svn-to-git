@@ -1,5 +1,6 @@
 ﻿using System;
 using MigrateFromSvnToGit;
+using MigrateFromSvnToGit.Exceptions;
 using MigrateFromSvnToGit.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
@@ -7,11 +8,22 @@ using NUnit.Framework;
 namespace Test.Core {
     [TestFixture]
     public class CreateCloneGitTest {
+        private CreateCloneGit createCloneGit;
+        private IProcessCaller processCaller;
+        private IValidateFile validateFile;
+
+        [SetUp]
+        public void Setup() {
+            processCaller = Substitute.For<IProcessCaller>();
+            validateFile = Substitute.For<IValidateFile>();
+
+            createCloneGit = new CreateCloneGit(processCaller, validateFile);
+        }
+
         [Test]
         public void ShouldCallExternalProcessWithGitSvnClone() {
-            var processCaller = Substitute.For<IProcessCaller>();
-
-            var createCloneGit = new CreateCloneGit(processCaller);
+            validateFile.Exist("c:\\users.txt")
+                        .Returns(true);
 
             createCloneGit.Create("https://svn.com/project/svn", "c:\\users.txt", "projectName");
 
@@ -23,25 +35,28 @@ namespace Test.Core {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void WhenNotInformedUrlSvnShouldThrowArgumentException() {
-            var createCloneGit = new CreateCloneGit(Substitute.For<IProcessCaller>());
-
             createCloneGit.Create(string.Empty, "c:\\users.txt", "projectName");
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void WhenNotInformedUserFilePathShouldThrowArgumentException() {
-            var createCloneGit = new CreateCloneGit(Substitute.For<IProcessCaller>());
-
             createCloneGit.Create("https://svn.com/project/svn", string.Empty, "projectName");
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void WhenNotInformedProjetcNameShouldThrowArgumentException() {
-            var createCloneGit = new CreateCloneGit(Substitute.For<IProcessCaller>());
-
             createCloneGit.Create("https://svn.com/project/svn", "c:\\users.txt", string.Empty);
+        }
+
+        [Test]
+        [ExpectedException(typeof(FileUsersNotFoundException))]
+        public void ShouldThrowExceptionWhenFileUsersNotFound() {
+            validateFile.Exist("c:\\users.txt")
+                        .Returns(false);
+
+            createCloneGit.Create("https://svn.com/project/svn", "c:\\users.txt", "projectName");
         }
     }
 }
