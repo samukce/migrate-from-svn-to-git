@@ -1,8 +1,10 @@
 ﻿using System;
+using Castle.Core;
 using Core.Exceptions;
 using Core.Interfaces;
 
 namespace Core {
+    [CastleComponent("Core.CreateCloneGit", typeof(ICreateCloneGit), Lifestyle = LifestyleType.Singleton)]
     public class CreateCloneGit : ICreateCloneGit {
         private const string FileExecute = "git.exe";
         private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata {2}";

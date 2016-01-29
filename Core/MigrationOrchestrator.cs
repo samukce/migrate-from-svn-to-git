@@ -1,6 +1,8 @@
-﻿using Core.Interfaces;
+﻿using Castle.Core;
+using Core.Interfaces;
 
 namespace Core {
+    [CastleComponent("Core.MigrationOrchestrator", Lifestyle = LifestyleType.Singleton)]
     public class MigrationOrchestrator {
         private readonly ICreateBareGit createBareGit;
         private readonly ICreateCloneGit createCloneGit;

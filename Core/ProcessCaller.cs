@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using Castle.Core;
 using Core.Exceptions;
 using Core.Interfaces;
 
 namespace Core {
+    [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
         private const int MillisecondsTimeout = 1000 * 60 * 5;
 
