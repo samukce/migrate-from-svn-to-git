@@ -1,4 +1,5 @@
 ﻿using System;
+using MigrateFromSvnToGit.Interfaces;
 
 namespace MigrateFromSvnToGit {
     public class CreateBareGit : ICreateBareGit {

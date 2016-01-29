@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using MigrateFromSvnToGit.Exceptions;
+using MigrateFromSvnToGit.Interfaces;
 
 namespace MigrateFromSvnToGit {
     public class ProcessCaller : IProcessCaller {

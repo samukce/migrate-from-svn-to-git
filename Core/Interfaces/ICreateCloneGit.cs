@@ -1,4 +1,4 @@
-﻿namespace MigrateFromSvnToGit {
+﻿namespace MigrateFromSvnToGit.Interfaces {
     public interface ICreateCloneGit {
         void Create(string svnUrl, string usersAuthorsPathFile, string projectName);
     }

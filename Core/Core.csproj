@@ -44,10 +44,10 @@
   <ItemGroup>
     <Compile Include="CreateBareGit.cs" />
     <Compile Include="CreateCloneGit.cs" />
-    <Compile Include="ExecuteFileNotFoundException.cs" />
-    <Compile Include="ICreateBareGit.cs" />
-    <Compile Include="ICreateCloneGit.cs" />
-    <Compile Include="IProcessCaller.cs" />
+    <Compile Include="Exceptions\ExecuteFileNotFoundException.cs" />
+    <Compile Include="Interfaces\ICreateBareGit.cs" />
+    <Compile Include="Interfaces\ICreateCloneGit.cs" />
+    <Compile Include="Interfaces\IProcessCaller.cs" />
     <Compile Include="MigrationOrchestrator.cs" />
     <Compile Include="ProcessCaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

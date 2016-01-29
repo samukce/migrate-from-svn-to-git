@@ -1,4 +1,6 @@
-﻿namespace MigrateFromSvnToGit {
+﻿using MigrateFromSvnToGit.Interfaces;
+
+namespace MigrateFromSvnToGit {
     public class MigrationOrchestrator {
         private readonly ICreateBareGit createBareGit;
         private readonly ICreateCloneGit createCloneGit;
