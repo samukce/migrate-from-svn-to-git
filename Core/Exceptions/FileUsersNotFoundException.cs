@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MigrateFromSvnToGit.Core.Exceptions {
+namespace Core.Exceptions {
     public class FileUsersNotFoundException : Exception {
         private const string MessageFormat = "Users' file {0} not found.";
 

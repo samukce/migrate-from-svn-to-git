@@ -1,7 +1,7 @@
 ﻿using System;
-using MigrateFromSvnToGit.Core.Interfaces;
+using Core.Interfaces;
 
-namespace MigrateFromSvnToGit.Core {
+namespace Core {
     public class CreateBareGit : ICreateBareGit {
         private const string FileExecute = "git.exe";
         private const string Arguments = "clone --bare {0}";

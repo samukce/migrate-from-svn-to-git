@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using MigrateFromSvnToGit.Core.Interfaces;
+using Core.Interfaces;
 
-namespace MigrateFromSvnToGit.Core {
+namespace Core {
     public class ValidateFile : IValidateFile {
         public bool Exist(string fullPath) {
             if (string.IsNullOrWhiteSpace(fullPath))

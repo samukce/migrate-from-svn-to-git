@@ -1,8 +1,8 @@
 ﻿using System;
-using MigrateFromSvnToGit.Core.Exceptions;
-using MigrateFromSvnToGit.Core.Interfaces;
+using Core.Exceptions;
+using Core.Interfaces;
 
-namespace MigrateFromSvnToGit.Core {
+namespace Core {
     public class CreateCloneGit : ICreateCloneGit {
         private const string FileExecute = "git.exe";
         private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata {2}";

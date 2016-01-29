@@ -1,4 +1,4 @@
-﻿namespace MigrateFromSvnToGit.Core.Interfaces {
+﻿namespace Core.Interfaces {
     public interface IValidateFile {
         bool Exist(string fullPath);
     }

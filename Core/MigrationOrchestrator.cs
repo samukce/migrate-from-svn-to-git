@@ -1,6 +1,6 @@
-﻿using MigrateFromSvnToGit.Core.Interfaces;
+﻿using Core.Interfaces;
 
-namespace MigrateFromSvnToGit.Core {
+namespace Core {
     public class MigrationOrchestrator {
         private readonly ICreateBareGit createBareGit;
         private readonly ICreateCloneGit createCloneGit;

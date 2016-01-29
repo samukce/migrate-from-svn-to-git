@@ -1,7 +1,6 @@
 ﻿using System;
-using MigrateFromSvnToGit;
-using MigrateFromSvnToGit.Core;
-using MigrateFromSvnToGit.Core.Interfaces;
+using Core;
+using Core.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
 
