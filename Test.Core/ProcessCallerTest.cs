@@ -9,12 +9,13 @@ namespace Test.Core {
 
         [SetUp]
         public void Setup() {
-            Directory.Delete(DirectoryNameTest, true);
+            if (Directory.Exists(DirectoryNameTest))
+                Directory.Delete(DirectoryNameTest, true);
         }
 
         [Test]
         public void ShouldCreateTheTestDirectoryUsingCmdWindow() {
-            new ProcessCaller().Execute("cmd.exe", "md " + DirectoryNameTest);
+            new ProcessCaller().Execute("cmd.exe", "/c md " + DirectoryNameTest);
 
             Assert.That(Directory.Exists(DirectoryNameTest));
         }
