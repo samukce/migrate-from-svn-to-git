@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CreateBareGit.cs" />
     <Compile Include="CreateCloneGit.cs" />
+    <Compile Include="ExecuteFileNotFoundException.cs" />
     <Compile Include="ICreateBareGit.cs" />
     <Compile Include="ICreateCloneGit.cs" />
     <Compile Include="IProcessCaller.cs" />
