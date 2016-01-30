@@ -110,28 +110,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="web\bootstrap\css\bootstrap-theme.css.map">
+    <None Include="web\assets\bootstrap\css\bootstrap-theme.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="web\bootstrap\css\bootstrap-theme.min.css.map">
+    <None Include="web\assets\bootstrap\css\bootstrap-theme.min.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="web\bootstrap\css\bootstrap.css.map">
+    <None Include="web\assets\bootstrap\css\bootstrap.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="web\bootstrap\css\bootstrap.min.css.map">
+    <None Include="web\assets\bootstrap\css\bootstrap.min.css.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="web\bootstrap\fonts\glyphicons-halflings-regular.eot">
+    <None Include="web\assets\bootstrap\fonts\glyphicons-halflings-regular.eot">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="web\bootstrap\fonts\glyphicons-halflings-regular.ttf">
+    <None Include="web\assets\bootstrap\fonts\glyphicons-halflings-regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="web\bootstrap\fonts\glyphicons-halflings-regular.woff">
+    <None Include="web\assets\bootstrap\fonts\glyphicons-halflings-regular.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="web\bootstrap\fonts\glyphicons-halflings-regular.woff2">
+    <None Include="web\assets\bootstrap\fonts\glyphicons-halflings-regular.woff2">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -145,28 +145,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web\bootstrap\css\bootstrap-theme.css">
+    <Content Include="web\assets\css\custom.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\bootstrap\css\bootstrap-theme.min.css">
+    <Content Include="web\assets\bootstrap\css\bootstrap-theme.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\bootstrap\css\bootstrap.css">
+    <Content Include="web\assets\bootstrap\css\bootstrap-theme.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\bootstrap\css\bootstrap.min.css">
+    <Content Include="web\assets\bootstrap\css\bootstrap.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\bootstrap\fonts\glyphicons-halflings-regular.svg">
+    <Content Include="web\assets\bootstrap\css\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\bootstrap\js\bootstrap.js">
+    <Content Include="web\assets\bootstrap\fonts\glyphicons-halflings-regular.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\bootstrap\js\bootstrap.min.js">
+    <Content Include="web\assets\bootstrap\js\bootstrap.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\bootstrap\js\npm.js">
+    <Content Include="web\assets\bootstrap\js\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="web\assets\bootstrap\js\npm.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="web\index.html">
