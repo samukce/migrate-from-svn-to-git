@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
+using CefSharp;
+using FrontEnd.BrowserForm;
 
 namespace FrontEnd {
     static class Program {
@@ -13,7 +15,23 @@ namespace FrontEnd {
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            StartChromiumBroser();
+        }
+
+        private static void StartChromiumBroser() {
+            Cef.EnableHighDPISupport();
+
+            var settings = new CefSettings();
+
+            settings.RegisterScheme(new CefCustomScheme {
+                SchemeName = LocalSchemeHandlerFactory.SchemeName,
+                SchemeHandlerFactory = new LocalSchemeHandlerFactory()
+            });
+            Cef.Initialize(settings);
+
+            var browser = new SimpleBrowserForm();
+            Application.Run(browser);
         }
     }
 }
