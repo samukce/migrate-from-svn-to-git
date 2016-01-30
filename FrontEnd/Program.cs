@@ -17,10 +17,10 @@ namespace FrontEnd {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            StartChromiumBroser();
+            StartChromiumBrowser();
         }
 
-        private static void StartChromiumBroser() {
+        private static void StartChromiumBrowser() {
             Cef.EnableHighDPISupport();
 
             var settings = new CefSettings();
