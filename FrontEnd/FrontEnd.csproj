@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BrowserForm\INavigator.cs" />
     <Compile Include="BrowserForm\LocalSchemeHandler.cs" />
     <Compile Include="BrowserForm\LocalSchemeHandlerFactory.cs" />
     <Compile Include="BrowserForm\SimpleBrowserForm.cs">
@@ -86,6 +87,9 @@
     <Compile Include="BrowserForm\SimpleBrowserForm.Designer.cs">
       <DependentUpon>SimpleBrowserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Facility.cs" />
+    <Compile Include="JsObjects\IndexJsObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BrowserForm\SimpleBrowserForm.resx">

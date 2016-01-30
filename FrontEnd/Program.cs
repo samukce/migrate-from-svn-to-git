@@ -4,6 +4,7 @@ using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using CefSharp;
 using FrontEnd.BrowserForm;
+using FrontEnd.Controllers;
 
 namespace FrontEnd {
     static class Program {
@@ -30,8 +31,8 @@ namespace FrontEnd {
             });
             Cef.Initialize(settings);
 
-            var browser = new SimpleBrowserForm();
-            Application.Run(browser);
+            container.Resolve<IndexController>().Index();
+            Application.Run(container.Resolve<INavigator>().WinForm());
         }
     }
 }

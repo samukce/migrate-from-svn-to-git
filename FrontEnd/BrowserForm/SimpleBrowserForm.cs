@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using Castle.Core;
 using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
 
 namespace FrontEnd.BrowserForm {
-    public partial class SimpleBrowserForm : Form {
+    [CastleComponent("FrontEnd.BrowserForm.SimpleBrowserForm", typeof(INavigator), Lifestyle = LifestyleType.Singleton)]
+    public partial class SimpleBrowserForm : Form, INavigator {
         private ChromiumWebBrowser browser;
 
         public SimpleBrowserForm() {
@@ -15,19 +17,12 @@ namespace FrontEnd.BrowserForm {
             var version = String.Format("Chromium: {0}, CEF: {1}, CefSharp: {2}, Environment: {3}", Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, bitness);
             DisplayOutput(version);
 
-            //Only perform layout when control has completly finished resizing
             ResizeBegin += (s, e) => SuspendLayout();
             ResizeEnd += (s, e) => ResumeLayout(true);
-
-            Load += OnLoad;
         }
 
-        private void OnLoad(object sender, EventArgs e) {
-            CreateBrowser();
-        }
-
-        private void CreateBrowser() {
-            browser = new ChromiumWebBrowser("local://web/index.html") {
+        private void CreateBrowser(string address) {
+            browser = new ChromiumWebBrowser(address) {
                 Dock = DockStyle.Fill,
             };
             toolStripContainer.ContentPanel.Controls.Add(browser);
@@ -35,8 +30,6 @@ namespace FrontEnd.BrowserForm {
             browser.ConsoleMessage += OnBrowserConsoleMessage;
             browser.StatusMessage += OnBrowserStatusMessage;
             browser.TitleChanged += OnBrowserTitleChanged;
-            
-            //browser.RegisterJsObject("bound", new BoundObject());
         }
 
         private void OnBrowserConsoleMessage(object sender, ConsoleMessageEventArgs args) {
@@ -55,15 +48,35 @@ namespace FrontEnd.BrowserForm {
             this.InvokeOnUiThreadIfRequired(() => outputLabel.Text = output);
         }
 
-        private void LoadUrl(string url) {
-            if (Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute)) {
-                browser.Load(url);
-            }
-        }
-
         private void SimpleBrowserForm_FormClosed(object sender, FormClosedEventArgs e) {
             browser.Dispose();
             Cef.Shutdown();
+        }
+
+        private void RegisterJsObject(object jsObject) {
+            if (jsObject == null)
+                return;
+
+            if (browser == null)
+                return;
+
+            browser.RegisterJsObject("bound", jsObject);
+        }
+
+        public Form WinForm() {
+            return this;
+        }
+
+        public void LoadUrl(string url, object jsObject = null) {
+            if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
+                return;
+
+            if (browser == null)
+                CreateBrowser(url);
+            else
+                browser.Load(url);
+
+            RegisterJsObject(jsObject);
         }
     }
 }

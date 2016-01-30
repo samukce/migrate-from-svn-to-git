@@ -35,16 +35,13 @@
 <script type="text/javascript">
     var formMain = document.getElementById('formMain');
     formMain.addEventListener('submit', function () {
-        alert('teste');
-
         var projectName = document.getElementById("inputProjectName").value;
         var svnAdress = document.getElementById("inputSvnAdress").value;
         var usersFile = document.getElementById("inputUsersFile").value;
 
-        if (callbackObj)
-            callbackObj.execute(svnAdress, usersFile, projectName);
-
-        return false;
+        bound.execute(svnAdress, usersFile, projectName);
+        
+        return true;
     });
 </script>
 </body>
