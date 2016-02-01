@@ -13,10 +13,6 @@ namespace FrontEnd.BrowserForm {
         public SimpleBrowserForm() {
             InitializeComponent();
 
-            var bitness = Environment.Is64BitProcess ? "x64" : "x86";
-            var version = String.Format("Chromium: {0}, CEF: {1}, CefSharp: {2}, Environment: {3}", Cef.ChromiumVersion, Cef.CefVersion, Cef.CefSharpVersion, bitness);
-            DisplayOutput(version);
-
             ResizeBegin += (s, e) => SuspendLayout();
             ResizeEnd += (s, e) => ResumeLayout(true);
         }
@@ -75,7 +71,7 @@ namespace FrontEnd.BrowserForm {
                 CreateBrowser(url);
             else
                 browser.Load(url);
-
+            
             RegisterJsObject(jsObject);
         }
     }

@@ -10,6 +10,8 @@ namespace Core {
     public class ProcessCaller : IProcessCaller {
         private const int MillisecondsTimeout = 1000 * 60 * 5;
 
+        public Action<string> OutputLog { get; set; }
+
         public void Execute(string fileName, string arguments) {
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("fileName");
@@ -18,17 +20,31 @@ namespace Core {
                 StartInfo = {
                     FileName = fileName,
                     Arguments = arguments,
-                    WindowStyle = ProcessWindowStyle.Hidden
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false
                 }
             };
 
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_OutputDataReceived;
+
             try {
                 process.Start();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
 
                 process.WaitForExit(MillisecondsTimeout);
             } catch (Win32Exception) {
                 throw new ExecuteFileNotFoundException(fileName);
             }
+        }
+
+        private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e) {
+            if (OutputLog != null)
+                OutputLog(e.Data);
         }
     }
 }

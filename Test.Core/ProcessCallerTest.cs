@@ -33,5 +33,35 @@ namespace Test.Core {
         public void ShouldThrowExecuteFileNotFoundExceptionWhenFileNotFound() {
             new ProcessCaller().Execute("nothing.exe", string.Empty);
         }
+
+        [Test]
+        public void ShouldThrowEventWithOutputFromProcess() {
+            var callEvent = false;
+
+            var processCaller = new ProcessCaller();
+
+            processCaller.OutputLog += delegate {
+                callEvent = true;
+            };
+
+            processCaller.Execute("cmd.exe", "/c dir");
+            
+            Assert.That(callEvent);
+        }
+
+        [Test]
+        public void ShouldThrowEventWithOutputErrorFromProcess() {
+            var callEvent = false;
+
+            var processCaller = new ProcessCaller();
+
+            processCaller.OutputLog += delegate {
+                callEvent = true;
+            };
+
+            processCaller.Execute("cmd.exe", "/c no_commande_xist");
+            
+            Assert.That(callEvent);
+        }
     }
 }
