@@ -57,6 +57,7 @@
     <Compile Include="Facility.cs" />
     <Compile Include="Interfaces\ICreateBareGit.cs" />
     <Compile Include="Interfaces\ICreateCloneGit.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IProcessCaller.cs" />
     <Compile Include="Interfaces\IValidateFile.cs" />
     <Compile Include="MigrationOrchestrator.cs" />

@@ -2,22 +2,29 @@
 using System.IO;
 using Core;
 using Core.Exceptions;
+using Core.Interfaces;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Test.Core {
     [TestFixture]
     public class ProcessCallerTest {
         private const string DirectoryNameTest = "teste";
+        private ProcessCaller processCaller;
+        private ILogger logger;
 
         [SetUp]
         public void Setup() {
             if (Directory.Exists(DirectoryNameTest))
                 Directory.Delete(DirectoryNameTest, true);
+
+            logger = Substitute.For<ILogger>();
+            processCaller = new ProcessCaller(logger);
         }
 
         [Test]
         public void ShouldCreateTheTestDirectoryUsingCmdWindow() {
-            new ProcessCaller().Execute("cmd.exe", "/c md " + DirectoryNameTest);
+            processCaller.Execute("cmd.exe", "/c md " + DirectoryNameTest);
 
             Assert.That(Directory.Exists(DirectoryNameTest));
         }
@@ -25,43 +32,33 @@ namespace Test.Core {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void WhenNotInformedFileNameShouldThrowArgumentException() {
-            new ProcessCaller().Execute(string.Empty, "/c md " + DirectoryNameTest);
+            processCaller.Execute(string.Empty, "/c md " + DirectoryNameTest);
         }
 
         [Test]
         [ExpectedException(typeof(ExecuteFileNotFoundException))]
         public void ShouldThrowExecuteFileNotFoundExceptionWhenFileNotFound() {
-            new ProcessCaller().Execute("nothing.exe", string.Empty);
+            processCaller.Execute("nothing.exe", string.Empty);
         }
 
         [Test]
         public void ShouldThrowEventWithOutputFromProcess() {
-            var callEvent = false;
-
-            var processCaller = new ProcessCaller();
-
-            processCaller.OutputLog += delegate {
-                callEvent = true;
-            };
+            processCaller = new ProcessCaller(logger);
 
             processCaller.Execute("cmd.exe", "/c dir");
-            
-            Assert.That(callEvent);
+
+            logger.ReceivedWithAnyArgs()
+                  .Info(null);
         }
 
         [Test]
         public void ShouldThrowEventWithOutputErrorFromProcess() {
-            var callEvent = false;
-
-            var processCaller = new ProcessCaller();
-
-            processCaller.OutputLog += delegate {
-                callEvent = true;
-            };
+            processCaller = new ProcessCaller(logger);
 
             processCaller.Execute("cmd.exe", "/c no_commande_xist");
-            
-            Assert.That(callEvent);
+
+            logger.ReceivedWithAnyArgs()
+                  .Info(null);
         }
     }
 }

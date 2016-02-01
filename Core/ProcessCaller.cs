@@ -9,8 +9,11 @@ namespace Core {
     [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
         private const int MillisecondsTimeout = 1000 * 60 * 5;
+        private ILogger logger;
 
-        public Action<string> OutputLog { get; set; }
+        public ProcessCaller(ILogger logger) {
+            this.logger = logger;
+        }
 
         public void Execute(string fileName, string arguments) {
             if (string.IsNullOrWhiteSpace(fileName))
@@ -43,8 +46,7 @@ namespace Core {
         }
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e) {
-            if (OutputLog != null)
-                OutputLog(e.Data);
+            logger.Info(e.Data);
         }
     }
 }
