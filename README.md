@@ -25,7 +25,7 @@ So I took to learn more about the Chromium browser with manipulation of C# objec
 
 ## Frameworks
 
-- Chromium-based browser component  (CefSharp)
+- Chromium-based browser component CefSharp (https://github.com/cefsharp/cefsharp)
 - Castle Windsor (http://docs.castleproject.org/Windsor.MainPage.ashx)
 - NUnit (http://nunit.org/)
 - NSubstitute (http://nsubstitute.github.io/)
