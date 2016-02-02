@@ -1,10 +1,9 @@
 ﻿using Castle.Core;
-using CefSharp;
 using Core.Interfaces;
 using FrontEnd.BrowserForm;
 
-namespace FrontEnd.JsObjects {
-    [CastleComponent("FrontEnd.JsObjects.LoggerBrowser", typeof(ILogger), Lifestyle = LifestyleType.Transient)]
+namespace FrontEnd {
+    [CastleComponent("FrontEnd.LoggerBrowser", typeof(ILogger), Lifestyle = LifestyleType.Transient)]
     public class LoggerBrowser : ILogger {
         private readonly INavigator navigator;
 
@@ -13,11 +12,11 @@ namespace FrontEnd.JsObjects {
         }
 
         public void Info(string message) {
-            navigator.Browser().ExecuteScriptAsync(JsLogMessages(message));
+            navigator.ExecuteJavaScript(JsLogMessages(message));
         }
 
         private static string JsLogMessages(string message) {
-            return string.Format("addlog('{0}');", message);
+            return string.Format("addlog(\"{0}\");", message);
         }
     }
 }

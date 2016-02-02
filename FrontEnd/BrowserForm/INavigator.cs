@@ -1,10 +1,9 @@
 ﻿using System.Windows.Forms;
-using CefSharp.WinForms;
 
 namespace FrontEnd.BrowserForm {
     public interface INavigator {
         void LoadUrl(string url, object jsObject = null);
+        void ExecuteJavaScript(string javaScript);
         Form WinForm();
-        ChromiumWebBrowser Browser();
     }
 }

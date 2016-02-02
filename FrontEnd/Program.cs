@@ -18,6 +18,9 @@ namespace FrontEnd {
             Application.SetCompatibleTextRenderingDefault(false);
 
             StartChromiumBrowser();
+
+            container.Resolve<IndexController>().Index();
+            Application.Run(container.Resolve<INavigator>().WinForm());
         }
 
         private static void StartChromiumBrowser() {
@@ -29,10 +32,8 @@ namespace FrontEnd {
                 SchemeName = LocalSchemeHandlerFactory.SchemeName,
                 SchemeHandlerFactory = new LocalSchemeHandlerFactory()
             });
-            Cef.Initialize(settings);
 
-            container.Resolve<IndexController>().Index();
-            Application.Run(container.Resolve<INavigator>().WinForm());
+            Cef.Initialize(settings);
         }
     }
 }

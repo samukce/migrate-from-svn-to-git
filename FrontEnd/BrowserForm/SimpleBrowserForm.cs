@@ -17,6 +17,30 @@ namespace FrontEnd.BrowserForm {
             ResizeEnd += (s, e) => ResumeLayout(true);
         }
 
+        public Form WinForm() {
+            return this;
+        }
+
+        public void LoadUrl(string url, object jsObject = null) {
+            if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
+                return;
+
+            if (browser == null) {
+                CreateBrowser(url);
+            } else {
+                browser.Load(url);
+            }
+
+            RegisterJsObject(jsObject);
+        }
+
+        public void ExecuteJavaScript(string javaScript) {
+            if (browser == null)
+                return;
+
+            browser.ExecuteScriptAsync(javaScript);
+        }
+
         private void CreateBrowser(string address) {
             browser = new ChromiumWebBrowser(address) {
                 Dock = DockStyle.Fill,
@@ -57,26 +81,6 @@ namespace FrontEnd.BrowserForm {
                 return;
 
             browser.RegisterAsyncJsObject("bound", jsObject);
-        }
-
-        public ChromiumWebBrowser Browser() {
-            return browser;
-        }
-
-        public Form WinForm() {
-            return this;
-        }
-
-        public void LoadUrl(string url, object jsObject = null) {
-            if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
-                return;
-
-            if (browser == null)
-                CreateBrowser(url);
-            else
-                browser.Load(url);
-
-            RegisterJsObject(jsObject);
         }
     }
 }

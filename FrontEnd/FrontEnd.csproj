@@ -89,8 +89,7 @@
     </Compile>
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Facility.cs" />
-    <Compile Include="JsObjects\IndexJsObject.cs" />
-    <Compile Include="JsObjects\LoggerBrowser.cs" />
+    <Compile Include="LoggerBrowser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BrowserForm\SimpleBrowserForm.resx">
