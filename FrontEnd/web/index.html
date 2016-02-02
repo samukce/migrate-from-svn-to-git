@@ -16,30 +16,42 @@
 
                 <label for="inputProjectName" class="sr-only">Project name</label>
                 <input type="text" id="inputProjectName" class="form-control" placeholder="Project name" required autofocus>
+                <br/>
 
                 <label for="inputSvnAdress" class="sr-only">SVN Andress (svn://host/project/trunk)</label>
                 <input type="url" id="inputSvnAdress" class="form-control" placeholder="SVN Andress" required autofocus>
+                <br />
 
                 <label for="inputUsersFile" class="sr-only">Users' file</label>
                 <input type="text" id="inputUsersFile" class="form-control" placeholder="Users' file" required>
+                <br/>
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Run</button>
+                <br/>
+
+                <textarea id="logtextarea" cols="40" rows="5"></textarea>
             </form>
         </div>
 
     </div> <!-- /container -->
 
-
+<script src="assets/js/jquery-1.12.0.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    var formMain = document.getElementById('formMain');
-    formMain.addEventListener('submit', function () {
-        var projectName = document.getElementById("inputProjectName").value;
-        var svnAdress = document.getElementById("inputSvnAdress").value;
-        var usersFile = document.getElementById("inputUsersFile").value;
+    function addlog(message) {
+        var txt = $("#logtextarea");
+        txt.val(txt.val() + "\n" + message);
+    }
 
-        bound.execute(svnAdress, usersFile, projectName);
-        
-        return true;
+    $(function() {
+        $("#formMain").submit(function (event) {
+            var projectName = $("#inputProjectName").val();
+            var svnAdress = $("#inputSvnAdress").val();
+            var usersFile = $("#inputUsersFile").val();
+
+            bound.execute(svnAdress, usersFile, projectName);
+
+            event.preventDefault();
+        });
     });
 </script>
 </body>

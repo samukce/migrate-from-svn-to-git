@@ -6,9 +6,7 @@ namespace FrontEnd.Controllers {
     [CastleComponent("FrontEnd.Controllers.IndexController", Lifestyle = LifestyleType.Transient)]
     public class IndexController {
         private static string HtmlPage { get { return "local://web/index.html"; } }
-        private static string SuccessPage { get { return "local://web/success.html"; } }
-        private static string ErrorPage { get { return "local://web/error.html"; } }
-
+        
         private readonly INavigator navigator;
         private readonly IndexJsObject indexJsObject;
 
@@ -25,11 +23,11 @@ namespace FrontEnd.Controllers {
         }
 
         private void ErrorMigrate(string errorMessage) {
-            navigator.LoadUrl(ErrorPage);
+            //navigator.LoadUrl(ErrorPage);
         }
 
         private void SuccessMigrate() {
-            navigator.LoadUrl(SuccessPage);
+            //navigator.LoadUrl(SuccessPage);
         }
     }
 }

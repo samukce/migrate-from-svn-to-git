@@ -90,6 +90,7 @@
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Facility.cs" />
     <Compile Include="JsObjects\IndexJsObject.cs" />
+    <Compile Include="JsObjects\LoggerBrowser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BrowserForm\SimpleBrowserForm.resx">
@@ -176,10 +177,7 @@
     <Content Include="web\assets\bootstrap\js\npm.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="web\error.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="web\success.html">
+    <Content Include="web\assets\js\jquery-1.12.0.min.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="web\index.html">

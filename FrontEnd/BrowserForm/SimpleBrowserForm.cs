@@ -56,7 +56,11 @@ namespace FrontEnd.BrowserForm {
             if (browser == null)
                 return;
 
-            browser.RegisterJsObject("bound", jsObject);
+            browser.RegisterAsyncJsObject("bound", jsObject);
+        }
+
+        public ChromiumWebBrowser Browser() {
+            return browser;
         }
 
         public Form WinForm() {
@@ -71,7 +75,7 @@ namespace FrontEnd.BrowserForm {
                 CreateBrowser(url);
             else
                 browser.Load(url);
-            
+
             RegisterJsObject(jsObject);
         }
     }
