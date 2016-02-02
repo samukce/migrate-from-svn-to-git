@@ -5,7 +5,7 @@ Simple automation to migrate projects from Subversion (SVN) to GIT with complete
 This is how it looks like:
 
 <p align="center">
-  <img src="https://www.dropbox.com/s/sy2cqxqfypwd3ft/main-github.png?dl=0" alt="Migrate SVN to Git example"/>
+  <img src="https://dl.dropboxusercontent.com/u/27281108/GitHub/MigracaoGitToSvn/main-github.png" alt="Migrate SVN to Git example"/>
 </p>
 
 ## Requirements to use
