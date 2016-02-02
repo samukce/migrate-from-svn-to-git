@@ -2,19 +2,25 @@
 
 Simple automation to migrate projects from Subversion (SVN) to GIT with complete historical.
 
-# Requirements to use
+This is how it looks like:
 
-Git on path of the Windows
+<p align="center">
+  <img src="https://www.dropbox.com/s/sy2cqxqfypwd3ft/main-github.png?dl=0" alt="Migrate SVN to Git example"/>
+</p>
+
+## Requirements to use
+
+Git.exe on path of the Windows
 .NET Framework 4.6
 
-# Frameworks
+## Frameworks
 
 Chromium-based browser component  (CefSharp)
 Castle Windsor
 NUnit
 NSubstitute
 
-# The application
+## The application
 
 It's a helpful application for resolve a simple issue, but that is frequent in a environment of legacy system where is migrating from SVN to GIT.
 
