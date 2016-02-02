@@ -26,9 +26,11 @@ So I took to learn more about the Chromium browser with manipulation of C# objec
 ## Frameworks
 
 - Chromium-based browser component  (CefSharp)
-- Castle Windsor
-- NUnit
-- NSubstitute
+- Castle Windsor (http://docs.castleproject.org/Windsor.MainPage.ashx)
+- NUnit (http://nunit.org/)
+- NSubstitute (http://nsubstitute.github.io/)
+- Bootstrap v3.3.6 (http://getbootstrap.com)
+- JQuery (https://jquery.com/)
 
 ## License
 
