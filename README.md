@@ -8,10 +8,20 @@ This is how it looks like:
   <img src="https://dl.dropboxusercontent.com/u/27281108/GitHub/MigracaoGitToSvn/main-github.png" alt="Migrate SVN to Git example"/>
 </p>
 
+## Download
+
+See the list of [available releases](https://github.com/samukce/migrate-from-svn-to-git/releases) .
+
 ## Requirements to use
 
 - Git.exe on path of the Windows
 - .NET Framework 4.6
+
+## The development of application
+
+It's a helpful application for resolve a simple issue, but that is frequent in a environment of legacy system where is migrating from SVN to GIT.
+
+So I took to learn more about the Chromium browser with manipulation of C# objects by javascript objects.
 
 ## Frameworks
 
@@ -19,9 +29,3 @@ This is how it looks like:
 - Castle Windsor
 - NUnit
 - NSubstitute
-
-## The development of application
-
-It's a helpful application for resolve a simple issue, but that is frequent in a environment of legacy system where is migrating from SVN to GIT.
-
-So I took to learn more about the Chromium browser with manipulation of C# objects by javascript objects.
