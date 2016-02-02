@@ -58,7 +58,7 @@ namespace Test.Core {
             processCaller.Execute("cmd.exe", "/c no_commande_xist");
 
             logger.ReceivedWithAnyArgs()
-                  .Info(null);
+                  .Error(null);
         }
     }
 }

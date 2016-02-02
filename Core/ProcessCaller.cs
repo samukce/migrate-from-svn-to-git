@@ -9,7 +9,7 @@ namespace Core {
     [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
         private const int MillisecondsTimeout = 1000 * 60 * 5;
-        private ILogger logger;
+        private readonly ILogger logger;
 
         public ProcessCaller(ILogger logger) {
             this.logger = logger;
@@ -32,7 +32,7 @@ namespace Core {
             };
 
             process.OutputDataReceived += Process_OutputDataReceived;
-            process.ErrorDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_ErrorDataReceived;
 
             try {
                 process.Start();
@@ -47,6 +47,10 @@ namespace Core {
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e) {
             logger.Info(e.Data);
+        }
+
+        private void Process_ErrorDataReceived(object sender, DataReceivedEventArgs e) {
+            logger.Error(e.Data);
         }
     }
 }

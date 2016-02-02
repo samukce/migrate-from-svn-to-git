@@ -12,6 +12,14 @@ namespace FrontEnd {
         }
 
         public void Info(string message) {
+            RegisterMessageLog(message);
+        }
+
+        public void Error(string message) {
+            RegisterMessageLog(message);
+        }
+
+        private void RegisterMessageLog(string message) {
             navigator.ExecuteJavaScript(JsLogMessages(message));
         }
 
