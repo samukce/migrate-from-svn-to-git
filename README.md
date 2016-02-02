@@ -10,7 +10,7 @@ This is how it looks like:
 
 ## Download
 
-See the list of [available releases](https://github.com/samukce/migrate-from-svn-to-git/releases) .
+See the list of [available releases](https://github.com/samukce/migrate-from-svn-to-git/releases).
 
 ## Requirements to use
 
