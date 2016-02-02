@@ -10,15 +10,15 @@ This is how it looks like:
 
 ## Requirements to use
 
-Git.exe on path of the Windows
-.NET Framework 4.6
+- Git.exe on path of the Windows
+- .NET Framework 4.6
 
 ## Frameworks
 
-Chromium-based browser component  (CefSharp)
-Castle Windsor
-NUnit
-NSubstitute
+- Chromium-based browser component  (CefSharp)
+- Castle Windsor
+- NUnit
+- NSubstitute
 
 ## The application
 
