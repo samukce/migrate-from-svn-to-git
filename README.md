@@ -29,3 +29,7 @@ So I took to learn more about the Chromium browser with manipulation of C# objec
 - Castle Windsor
 - NUnit
 - NSubstitute
+
+## License
+
+MIT License
