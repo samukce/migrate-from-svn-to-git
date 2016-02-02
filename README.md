@@ -20,7 +20,7 @@ This is how it looks like:
 - NUnit
 - NSubstitute
 
-## The application
+## The development of application
 
 It's a helpful application for resolve a simple issue, but that is frequent in a environment of legacy system where is migrating from SVN to GIT.
 
