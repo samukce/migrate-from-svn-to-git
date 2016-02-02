@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MigrateFromSvnToGit")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("MigrateFromSvnToGit.Core")]
+[assembly: AssemblyDescription("Migration project from SVN to GIT.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MigrateFromSvnToGit")]
+[assembly: AssemblyCompany("Samuel Pereira")]
+[assembly: AssemblyProduct("MigrateFromSvnToGit.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

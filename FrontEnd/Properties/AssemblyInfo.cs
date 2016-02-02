@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FrontEnd")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("MigrateFromSvnToGit.FrontEnd")]
+[assembly: AssemblyDescription("Migration project from SVN to GIT.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FrontEnd")]
+[assembly: AssemblyCompany("Samuel Pereira")]
+[assembly: AssemblyProduct("MigrateFromSvnToGit.FrontEnd")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
