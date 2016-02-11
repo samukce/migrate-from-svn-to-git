@@ -15,7 +15,7 @@ namespace Core {
             this.logger = logger;
         }
 
-        public void Execute(string fileName, string arguments) {
+        public void Execute(string fileName, string arguments, string workingDirectory) {
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("fileName");
 
@@ -27,10 +27,11 @@ namespace Core {
                     CreateNoWindow = true,
                     RedirectStandardError = true,
                     RedirectStandardOutput = true,
-                    UseShellExecute = false
-                }
+                    UseShellExecute = false,
+                    WorkingDirectory = workingDirectory
+                },
             };
-
+            
             process.OutputDataReceived += Process_OutputDataReceived;
             process.ErrorDataReceived += Process_ErrorDataReceived;
 

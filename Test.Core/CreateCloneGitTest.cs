@@ -29,7 +29,8 @@ namespace Test.Core {
 
             processCaller.Received(1)
                          .Execute(@"git.exe",
-                                   "svn clone \"https://svn.com/project/svn\" --authors-file=c:\\users.txt --no-metadata projectName");
+                                   "svn clone \"https://svn.com/project/svn\" --authors-file=c:\\users.txt --no-metadata projectName",
+                                   string.Empty);
         }
 
         [Test]

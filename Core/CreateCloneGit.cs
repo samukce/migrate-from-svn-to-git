@@ -17,21 +17,21 @@ namespace Core {
             this.validateFile = validateFile;
         }
 
-        public void Create(string svnUrl, string usersAuthorsPathFile, string projectName) {
+        public void Create(string svnUrl, string usersAuthorsPathFile, string projectNameFolder) {
             if (string.IsNullOrWhiteSpace(svnUrl))
                 throw new ArgumentException("svnUrl");
 
             if (string.IsNullOrWhiteSpace(usersAuthorsPathFile))
                 throw new ArgumentException("usersAuthorsPathFile");
 
-            if (string.IsNullOrWhiteSpace(projectName))
-                throw new ArgumentException("projectName");
+            if (string.IsNullOrWhiteSpace(projectNameFolder))
+                throw new ArgumentException("projectNameFolder");
 
             if (!validateFile.Exist(usersAuthorsPathFile))
                 throw new FileUsersNotFoundException(usersAuthorsPathFile);
 
-            var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile, projectName);
-            processCaller.Execute(FileExecute, argumentsFormat);
+            var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile, projectNameFolder);
+            processCaller.Execute(FileExecute, argumentsFormat, string.Empty);
         }
     }
 }

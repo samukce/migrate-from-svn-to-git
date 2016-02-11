@@ -1,4 +1,7 @@
-﻿using Castle.Core;
+﻿using System;
+using System.IO;
+using Castle.Core;
+using Core.Exceptions;
 using Core.Interfaces;
 
 namespace Core {
@@ -12,9 +15,24 @@ namespace Core {
             this.createBareGit = createBareGit;
         }
 
-        public void Migrate(string svnUrl, string usersAuthorsPathFile, string projectName) {
-            createCloneGit.Create(svnUrl, usersAuthorsPathFile, projectName);
-            createBareGit.Create(projectName);
+        public void Migrate(string svnUrl, string usersAuthorsFullPathFile, string projectNameFolder) {
+            if (!File.Exists(usersAuthorsFullPathFile))
+                throw new ArgumentException(usersAuthorsFullPathFile);
+
+            if (Directory.Exists(projectNameFolder))
+                throw new ProjectFolderAlreadyExistsException(projectNameFolder);
+
+            CreateDirectoryBase(projectNameFolder);
+
+            var fileNameUsers = Path.GetFileName(usersAuthorsFullPathFile);
+            File.Copy(usersAuthorsFullPathFile, Path.Combine(projectNameFolder, fileNameUsers));
+
+            createCloneGit.Create(svnUrl, fileNameUsers, projectNameFolder);
+            createBareGit.Create(projectNameFolder);
+        }
+
+        private static void CreateDirectoryBase(string projectName) {
+            Directory.CreateDirectory(projectName);
         }
     }
 }

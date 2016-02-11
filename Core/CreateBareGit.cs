@@ -14,13 +14,13 @@ namespace Core {
             this.processCaller = processCaller;
         }
 
-        public void Create(string projectName) {
-            if (string.IsNullOrWhiteSpace(projectName))
-                throw new ArgumentException("projectName");
+        public void Create(string projectNameFolder) {
+            if (string.IsNullOrWhiteSpace(projectNameFolder))
+                throw new ArgumentException("projectNameFolder");
 
-            var argumentsFormat = string.Format(Arguments, projectName);
+            var argumentsFormat = string.Format(Arguments, projectNameFolder);
 
-            processCaller.Execute(FileExecute, argumentsFormat);
+            processCaller.Execute(FileExecute, argumentsFormat, string.Empty);
         }
     }
 }

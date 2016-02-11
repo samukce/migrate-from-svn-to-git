@@ -1,5 +1,5 @@
 ﻿namespace Core.Interfaces {
     public interface IProcessCaller {
-        void Execute(string fileName, string arguments);
+        void Execute(string fileName, string arguments, string workingDirectory);
     }
 }
