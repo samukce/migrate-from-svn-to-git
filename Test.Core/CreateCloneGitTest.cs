@@ -22,15 +22,15 @@ namespace Test.Core {
 
         [Test]
         public void ShouldCallExternalProcessWithGitSvnClone() {
-            validateFile.Exist("c:\\users.txt")
+            validateFile.Exist("users.txt")
                         .Returns(true);
 
-            createCloneGit.Create("https://svn.com/project/svn", "c:\\users.txt", "projectName");
+            createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
 
             processCaller.Received(1)
                          .Execute(@"git.exe",
-                                   "svn clone \"https://svn.com/project/svn\" --authors-file=c:\\users.txt --no-metadata projectName",
-                                   string.Empty);
+                                   "svn clone \"https://svn.com/project/svn\" --authors-file=users.txt --no-metadata svnclone",
+                                   "projectName");
         }
 
         [Test]

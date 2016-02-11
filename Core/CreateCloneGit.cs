@@ -7,7 +7,7 @@ namespace Core {
     [CastleComponent("Core.CreateCloneGit", typeof(ICreateCloneGit), Lifestyle = LifestyleType.Singleton)]
     public class CreateCloneGit : ICreateCloneGit {
         private const string FileExecute = "git.exe";
-        private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata {2}";
+        private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata svnclone";
 
         private readonly IProcessCaller processCaller;
         private readonly IValidateFile validateFile;
@@ -30,8 +30,8 @@ namespace Core {
             if (!validateFile.Exist(usersAuthorsPathFile))
                 throw new FileUsersNotFoundException(usersAuthorsPathFile);
 
-            var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile, projectNameFolder);
-            processCaller.Execute(FileExecute, argumentsFormat, string.Empty);
+            var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile);
+            processCaller.Execute(FileExecute, argumentsFormat, projectNameFolder);
         }
     }
 }

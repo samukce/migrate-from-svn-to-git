@@ -6,7 +6,7 @@ namespace Core {
     [CastleComponent("Core.CreateBareGit", typeof(ICreateBareGit), Lifestyle = LifestyleType.Singleton)]
     public class CreateBareGit : ICreateBareGit {
         private const string FileExecute = "git.exe";
-        private const string Arguments = "clone --bare {0}";
+        private const string Arguments = "clone --bare svnclone";
 
         private readonly IProcessCaller processCaller;
 
@@ -18,9 +18,9 @@ namespace Core {
             if (string.IsNullOrWhiteSpace(projectNameFolder))
                 throw new ArgumentException("projectNameFolder");
 
-            var argumentsFormat = string.Format(Arguments, projectNameFolder);
+            var argumentsFormat = string.Format(Arguments);
 
-            processCaller.Execute(FileExecute, argumentsFormat, string.Empty);
+            processCaller.Execute(FileExecute, argumentsFormat, projectNameFolder);
         }
     }
 }

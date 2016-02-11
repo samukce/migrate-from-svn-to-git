@@ -17,7 +17,7 @@ namespace Test.Core {
 
             processCaller.Received(1)
                          .Execute(@"git.exe",
-                                   "clone --bare projectName", string.Empty);
+                                   "clone --bare svnclone", "projectName");
         }
 
         [Test]
