@@ -16,8 +16,8 @@ namespace Core {
         }
 
         public void Migrate(string svnUrl, string usersAuthorsFullPathFile, string projectNameFolder) {
-            if (!File.Exists(usersAuthorsFullPathFile))
-                throw new ArgumentException(usersAuthorsFullPathFile);
+            if (string.IsNullOrWhiteSpace(usersAuthorsFullPathFile))
+                throw new ArgumentException("usersAuthorsFullPathFile");
 
             if (Directory.Exists(projectNameFolder))
                 throw new ProjectFolderAlreadyExistsException(projectNameFolder);
@@ -25,10 +25,15 @@ namespace Core {
             CreateDirectoryBase(projectNameFolder);
 
             var fileNameUsers = Path.GetFileName(usersAuthorsFullPathFile);
-            File.Copy(usersAuthorsFullPathFile, Path.Combine(projectNameFolder, fileNameUsers));
+            CopyUserFileToProjectFolder(usersAuthorsFullPathFile, projectNameFolder, fileNameUsers);
 
             createCloneGit.Create(svnUrl, fileNameUsers, projectNameFolder);
             createBareGit.Create(projectNameFolder);
+        }
+
+        private static void CopyUserFileToProjectFolder(string usersAuthorsFullPathFile, string projectNameFolder,
+            string fileNameUsers) {
+            File.Copy(usersAuthorsFullPathFile, Path.Combine(projectNameFolder, fileNameUsers));
         }
 
         private static void CreateDirectoryBase(string projectName) {

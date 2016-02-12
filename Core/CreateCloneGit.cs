@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Castle.Core;
 using Core.Exceptions;
 using Core.Interfaces;
@@ -27,8 +28,10 @@ namespace Core {
             if (string.IsNullOrWhiteSpace(projectNameFolder))
                 throw new ArgumentException("projectNameFolder");
 
-            if (!validateFile.Exist(usersAuthorsPathFile))
-                throw new FileUsersNotFoundException(usersAuthorsPathFile);
+            var fileUsersPath = Path.Combine(projectNameFolder, usersAuthorsPathFile);
+
+            if (!validateFile.Exist(fileUsersPath))
+                throw new FileUsersNotFoundException(fileUsersPath);
 
             var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile);
             processCaller.Execute(FileExecute, argumentsFormat, projectNameFolder);
