@@ -16,7 +16,7 @@ namespace Test.Core {
             createBareGit.Create("projectName");
 
             processCaller.Received(1)
-                         .Execute(@"git.exe",
+                         .ExecuteSync(@"git.exe",
                                    "clone --bare svnclone", "projectName");
         }
 

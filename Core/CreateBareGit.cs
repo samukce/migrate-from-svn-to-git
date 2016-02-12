@@ -20,7 +20,7 @@ namespace Core {
 
             var argumentsFormat = string.Format(Arguments);
 
-            processCaller.Execute(FileExecute, argumentsFormat, projectNameFolder);
+            processCaller.ExecuteSync(FileExecute, argumentsFormat, projectNameFolder);
         }
     }
 }

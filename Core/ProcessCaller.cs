@@ -15,7 +15,7 @@ namespace Core {
             this.logger = logger;
         }
 
-        public void Execute(string fileName, string arguments, string workingDirectory) {
+        public void ExecuteSync(string fileName, string arguments, string workingDirectory) {
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("fileName");
 

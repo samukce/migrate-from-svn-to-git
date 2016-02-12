@@ -28,7 +28,7 @@ namespace Test.Core {
             createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
 
             processCaller.Received(1)
-                         .Execute(@"git.exe",
+                         .ExecuteSync(@"git.exe",
                                    "svn clone \"https://svn.com/project/svn\" --authors-file=users.txt --no-metadata svnclone",
                                    "projectName");
         }
@@ -41,7 +41,7 @@ namespace Test.Core {
             createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
 
             processCaller.Received(1)
-                         .Execute(@"git.exe",
+                         .ExecuteSync(@"git.exe",
                                    "svn clone \"https://svn.com/project/svn\" --authors-file=users.txt --no-metadata svnclone",
                                    "projectName");
         }

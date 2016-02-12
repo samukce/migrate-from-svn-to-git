@@ -34,7 +34,7 @@ namespace Core {
                 throw new FileUsersNotFoundException(fileUsersPath);
 
             var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile);
-            processCaller.Execute(FileExecute, argumentsFormat, projectNameFolder);
+            processCaller.ExecuteSync(FileExecute, argumentsFormat, projectNameFolder);
         }
     }
 }
