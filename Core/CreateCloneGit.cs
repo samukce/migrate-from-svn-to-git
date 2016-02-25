@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Castle.Core;
 using Core.Exceptions;
 using Core.Interfaces;
@@ -7,7 +8,7 @@ namespace Core {
     [CastleComponent("Core.CreateCloneGit", typeof(ICreateCloneGit), Lifestyle = LifestyleType.Singleton)]
     public class CreateCloneGit : ICreateCloneGit {
         private const string FileExecute = "git.exe";
-        private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata {2}";
+        private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata svnclone";
 
         private readonly IProcessCaller processCaller;
         private readonly IValidateFile validateFile;
@@ -17,21 +18,23 @@ namespace Core {
             this.validateFile = validateFile;
         }
 
-        public void Create(string svnUrl, string usersAuthorsPathFile, string projectName) {
+        public void Create(string svnUrl, string usersAuthorsPathFile, string projectNameFolder) {
             if (string.IsNullOrWhiteSpace(svnUrl))
                 throw new ArgumentException("svnUrl");
 
             if (string.IsNullOrWhiteSpace(usersAuthorsPathFile))
                 throw new ArgumentException("usersAuthorsPathFile");
 
-            if (string.IsNullOrWhiteSpace(projectName))
-                throw new ArgumentException("projectName");
+            if (string.IsNullOrWhiteSpace(projectNameFolder))
+                throw new ArgumentException("projectNameFolder");
 
-            if (!validateFile.Exist(usersAuthorsPathFile))
-                throw new FileUsersNotFoundException(usersAuthorsPathFile);
+            var fileUsersPath = Path.Combine(projectNameFolder, usersAuthorsPathFile);
 
-            var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile, projectName);
-            processCaller.Execute(FileExecute, argumentsFormat);
+            if (!validateFile.Exist(fileUsersPath))
+                throw new FileUsersNotFoundException(fileUsersPath);
+
+            var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile);
+            processCaller.ExecuteSync(FileExecute, argumentsFormat, projectNameFolder);
         }
     }
 }

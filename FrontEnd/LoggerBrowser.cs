@@ -24,7 +24,8 @@ namespace FrontEnd {
         }
 
         private static string JsLogMessages(string message) {
-            return string.Format("addlog(\"{0}\");", message);
+            return string.IsNullOrWhiteSpace(message) ? string.Empty :
+                                                        string.Format("addlog(\"{0}\");", message.Replace("\"", "'"));
         }
     }
 }

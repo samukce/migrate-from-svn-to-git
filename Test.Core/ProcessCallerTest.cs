@@ -24,7 +24,7 @@ namespace Test.Core {
 
         [Test]
         public void ShouldCreateTheTestDirectoryUsingCmdWindow() {
-            processCaller.Execute("cmd.exe", "/c md " + DirectoryNameTest);
+            processCaller.ExecuteSync("cmd.exe", "/c md " + DirectoryNameTest, string.Empty);
 
             Assert.That(Directory.Exists(DirectoryNameTest));
         }
@@ -32,20 +32,20 @@ namespace Test.Core {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void WhenNotInformedFileNameShouldThrowArgumentException() {
-            processCaller.Execute(string.Empty, "/c md " + DirectoryNameTest);
+            processCaller.ExecuteSync(string.Empty, "/c md " + DirectoryNameTest, string.Empty);
         }
 
         [Test]
         [ExpectedException(typeof(ExecuteFileNotFoundException))]
         public void ShouldThrowExecuteFileNotFoundExceptionWhenFileNotFound() {
-            processCaller.Execute("nothing.exe", string.Empty);
+            processCaller.ExecuteSync("nothing.exe", string.Empty, string.Empty);
         }
 
         [Test]
         public void ShouldThrowEventWithOutputFromProcess() {
             processCaller = new ProcessCaller(logger);
 
-            processCaller.Execute("cmd.exe", "/c dir");
+            processCaller.ExecuteSync("cmd.exe", "/c dir", string.Empty);
 
             logger.ReceivedWithAnyArgs()
                   .Info(null);
@@ -55,10 +55,23 @@ namespace Test.Core {
         public void ShouldThrowEventWithOutputErrorFromProcess() {
             processCaller = new ProcessCaller(logger);
 
-            processCaller.Execute("cmd.exe", "/c no_commande_xist");
+            processCaller.ExecuteSync("cmd.exe", "/c no_commande_xist", string.Empty);
 
             logger.ReceivedWithAnyArgs()
                   .Error(null);
+        }
+
+        [Test]
+        public void ShouldConsiderRootpath() {
+            const string rootPath = "rootpath";
+
+            if (Directory.Exists(rootPath))
+                Directory.Delete(rootPath, true);
+            Directory.CreateDirectory(rootPath);
+
+            processCaller.ExecuteSync("cmd.exe", "/c md " + DirectoryNameTest, rootPath);
+
+            Assert.That(Directory.Exists(Path.Combine(rootPath, DirectoryNameTest)));
         }
     }
 }

@@ -8,14 +8,14 @@ using Core.Interfaces;
 namespace Core {
     [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
-        private const int MillisecondsTimeout = 1000 * 60 * 5;
+        private const int MillisecondsTimeout = 1000 * 60 * 60;
         private readonly ILogger logger;
 
         public ProcessCaller(ILogger logger) {
             this.logger = logger;
         }
 
-        public void Execute(string fileName, string arguments) {
+        public void ExecuteSync(string fileName, string arguments, string workingDirectory) {
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("fileName");
 
@@ -27,12 +27,14 @@ namespace Core {
                     CreateNoWindow = true,
                     RedirectStandardError = true,
                     RedirectStandardOutput = true,
-                    UseShellExecute = false
-                }
+                    UseShellExecute = false,
+                    WorkingDirectory = workingDirectory
+                },
             };
 
             process.OutputDataReceived += Process_OutputDataReceived;
             process.ErrorDataReceived += Process_ErrorDataReceived;
+            process.Exited += Process_Exited;
 
             try {
                 process.Start();
@@ -43,6 +45,10 @@ namespace Core {
             } catch (Win32Exception) {
                 throw new ExecuteFileNotFoundException(fileName);
             }
+        }
+
+        private void Process_Exited(object sender, EventArgs e) {
+            logger.Info("Process finished.");
         }
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e) {

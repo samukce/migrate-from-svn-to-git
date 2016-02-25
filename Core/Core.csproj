@@ -54,6 +54,7 @@
     <Compile Include="CreateCloneGit.cs" />
     <Compile Include="Exceptions\ExecuteFileNotFoundException.cs" />
     <Compile Include="Exceptions\FileUsersNotFoundException.cs" />
+    <Compile Include="Exceptions\ProjectFolderAlreadyExistsException.cs" />
     <Compile Include="Facility.cs" />
     <Compile Include="Interfaces\ICreateBareGit.cs" />
     <Compile Include="Interfaces\ICreateCloneGit.cs" />
