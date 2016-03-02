@@ -40,6 +40,8 @@
         function addlog(message) {
             var txt = $("#logtextarea");
             txt.val(txt.val() + "\n" + message);
+
+            txt.scrollTop(txt[0].scrollHeight);
         }
 
         function success() {
