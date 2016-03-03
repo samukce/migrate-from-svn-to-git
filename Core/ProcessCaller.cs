@@ -8,7 +8,6 @@ using Core.Interfaces;
 namespace Core {
     [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
-        private const int MillisecondsTimeout = 1000 * 60 * 60;
         private readonly ILogger logger;
 
         public ProcessCaller(ILogger logger) {
@@ -41,7 +40,7 @@ namespace Core {
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
 
-                process.WaitForExit(MillisecondsTimeout);
+                process.WaitForExit();
             } catch (Win32Exception) {
                 throw new ExecuteFileNotFoundException(fileName);
             }
