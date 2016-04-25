@@ -12,6 +12,7 @@ namespace Test.Core {
         private MigrationOrchestrator migrationOrchestrator;
         private ICreateCloneGit createCloneGit;
         private ICreateBareGit createBareGit;
+        private IOpenFolder openFolder;
 
         private const string PathProjectName = "ProjectPath";
         private string FileNameUserFake { get { return Path.GetTempFileName(); } }
@@ -20,11 +21,12 @@ namespace Test.Core {
         public void Setup() {
             createCloneGit = Substitute.For<ICreateCloneGit>();
             createBareGit = Substitute.For<ICreateBareGit>();
+            openFolder = Substitute.For<IOpenFolder>();
 
             if (Directory.Exists(PathProjectName))
                 Directory.Delete(PathProjectName, true);
 
-            migrationOrchestrator = new MigrationOrchestrator(createCloneGit, createBareGit);
+            migrationOrchestrator = new MigrationOrchestrator(createCloneGit, createBareGit, openFolder);
         }
 
         [Test]
@@ -107,6 +109,17 @@ namespace Test.Core {
         [Test]
         public void AbortIfUsersFileNotInformed() {
             Assert.Throws<ArgumentException>(() => migrationOrchestrator.Migrate(string.Empty, string.Empty, PathProjectName));
+        }
+
+        [Test]
+        public void ShouldOpenFolderWhenConcluded() {
+            migrationOrchestrator.Migrate(string.Empty, FileNameUserFake, PathProjectName);
+
+            Received.InOrder(() => {
+                createCloneGit.Create(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+                createBareGit.Create(Arg.Any<string>());
+                openFolder.Folder(PathProjectName);
+            });
         }
     }
 }

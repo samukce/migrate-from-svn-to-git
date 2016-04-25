@@ -8,11 +8,13 @@ namespace Core {
     [CastleComponent("Core.MigrationOrchestrator", Lifestyle = LifestyleType.Singleton)]
     public class MigrationOrchestrator {
         private readonly ICreateBareGit createBareGit;
+        private readonly IOpenFolder openFolder;
         private readonly ICreateCloneGit createCloneGit;
 
-        public MigrationOrchestrator(ICreateCloneGit createCloneGit, ICreateBareGit createBareGit) {
+        public MigrationOrchestrator(ICreateCloneGit createCloneGit, ICreateBareGit createBareGit, IOpenFolder openFolder) {
             this.createCloneGit = createCloneGit;
             this.createBareGit = createBareGit;
+            this.openFolder = openFolder;
         }
 
         public void Migrate(string svnUrl, string usersAuthorsFullPathFile, string projectNameFolder) {
@@ -29,6 +31,7 @@ namespace Core {
 
             createCloneGit.Create(svnUrl, fileNameUsers, projectNameFolder);
             createBareGit.Create(projectNameFolder);
+            openFolder.Folder(projectNameFolder);
         }
 
         private static void CopyUserFileToProjectFolder(string usersAuthorsFullPathFile, string projectNameFolder,
