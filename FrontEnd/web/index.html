@@ -67,7 +67,7 @@
                 var svnAdress = $("#inputSvnAddress").val();
                 var usersFile = $("#inputUsersFile").val();
                 var projectName = $("#inputProjectName").val();
-                var retry = $("#inputRetry").val();
+                var retry = parseInt($("#inputRetry").val());
                 
                 bound.execute(svnAdress, usersFile, projectName, retry);
 
