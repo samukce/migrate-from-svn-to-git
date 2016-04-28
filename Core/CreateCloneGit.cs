@@ -9,6 +9,7 @@ namespace Core {
     public class CreateCloneGit : ICreateCloneGit {
         private const string FileExecute = "git.exe";
         private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata svnclone";
+        private const string FileNameErrorClone = "perl.exe.stackdump";
 
         private readonly IProcessCaller processCaller;
         private readonly IValidateFile validateFile;
@@ -35,6 +36,15 @@ namespace Core {
 
             var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile);
             processCaller.ExecuteSync(FileExecute, argumentsFormat, projectNameFolder);
+
+            var fullFileNameError = GetFullFileNameError(projectNameFolder);
+
+            if (validateFile.Exist(fullFileNameError))
+                throw new CloneErrorException();
+        }
+
+        private string GetFullFileNameError(string projectNameFolder) {
+            return Path.Combine(projectNameFolder, "svnclone", FileNameErrorClone);
         }
     }
 }

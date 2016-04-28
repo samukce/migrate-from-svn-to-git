@@ -22,8 +22,11 @@ namespace Test.Core {
 
         [Test]
         public void ShouldCallExternalProcessWithGitSvnClone() {
-            validateFile.Exist(Arg.Any<string>())
+            validateFile.Exist("projectName\\users.txt")
                         .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(false);
 
             createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
 
@@ -71,6 +74,18 @@ namespace Test.Core {
                         .Returns(false);
 
             createCloneGit.Create("https://svn.com/project/svn", "c:\\users.txt", "projectName");
+        }
+
+        [Test]
+        [ExpectedException(typeof(CloneErrorException))]
+        public void ShouldThrowExceptionWhenErrorFileFound() {
+            validateFile.Exist("projectName\\users.txt")
+                        .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(true);
+
+            createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
         }
     }
 }

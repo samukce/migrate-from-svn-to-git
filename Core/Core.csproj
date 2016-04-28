@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CloneErrorException.cs" />
     <Compile Include="OpenFolder.cs" />
     <Compile Include="CreateBareGit.cs" />
     <Compile Include="CreateCloneGit.cs" />
