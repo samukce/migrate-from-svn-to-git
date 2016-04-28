@@ -1,9 +1,9 @@
 ﻿using System;
-using Core;
-using Core.Exceptions;
-using Core.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using SvnToGit.Core;
+using SvnToGit.Core.Exceptions;
+using SvnToGit.Core.Interfaces;
 
 namespace Test.Core {
     [TestFixture]
@@ -22,8 +22,11 @@ namespace Test.Core {
 
         [Test]
         public void ShouldCallExternalProcessWithGitSvnClone() {
-            validateFile.Exist(Arg.Any<string>())
+            validateFile.Exist("projectName\\users.txt")
                         .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(false);
 
             createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
 
@@ -71,6 +74,53 @@ namespace Test.Core {
                         .Returns(false);
 
             createCloneGit.Create("https://svn.com/project/svn", "c:\\users.txt", "projectName");
+        }
+
+        [Test]
+        [ExpectedException(typeof(CloneErrorException))]
+        public void ShouldThrowExceptionWhenErrorFileFound() {
+            validateFile.Exist("projectName\\users.txt")
+                        .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(true);
+
+            createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
+        }
+
+        [Test]
+        public void ShouldToDeleteSvnCloneFolderWhenCallCreateClone() {
+            createCloneGit = Substitute.ForPartsOf<CreateCloneGit>(processCaller, validateFile);
+
+            validateFile.Exist("projectName\\users.txt")
+                        .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(false);
+
+            createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
+
+            createCloneGit.Received(1)
+                          .CreateEmptyFolder("svnclone");
+        }
+
+
+        [Test]
+        public void ShouldFirstCallCreateFolderAndThanCloneFromSvn() {
+            createCloneGit = Substitute.ForPartsOf<CreateCloneGit>(processCaller, validateFile);
+
+            validateFile.Exist("projectName\\users.txt")
+                        .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(false);
+
+            createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
+
+            Received.InOrder(() => {
+                createCloneGit.CreateEmptyFolder("svnclone");
+                processCaller.ExecuteSync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+            });
         }
     }
 }

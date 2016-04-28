@@ -7,9 +7,9 @@
     <ProjectGuid>{AF98406E-447E-4662-AF5F-F3FE9F230498}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>SvnToGit.Core</RootNamespace>
+    <AssemblyName>SvnToGit.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\CloneErrorException.cs" />
+    <Compile Include="OpenFolder.cs" />
     <Compile Include="CreateBareGit.cs" />
     <Compile Include="CreateCloneGit.cs" />
     <Compile Include="Exceptions\ExecuteFileNotFoundException.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Interfaces\ICreateBareGit.cs" />
     <Compile Include="Interfaces\ICreateCloneGit.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Interfaces\IOpenFolder.cs" />
     <Compile Include="Interfaces\IProcessCaller.cs" />
     <Compile Include="Interfaces\IValidateFile.cs" />
     <Compile Include="MigrationOrchestrator.cs" />

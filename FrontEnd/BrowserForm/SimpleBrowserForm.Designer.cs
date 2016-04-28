@@ -1,4 +1,4 @@
-﻿namespace FrontEnd.BrowserForm {
+﻿namespace SvnToGit.FrontEnd.BrowserForm {
     partial class SimpleBrowserForm {
         /// <summary>
         /// Required designer variable.

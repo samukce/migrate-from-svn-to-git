@@ -2,13 +2,12 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using Castle.Core;
-using Core.Exceptions;
-using Core.Interfaces;
+using SvnToGit.Core.Exceptions;
+using SvnToGit.Core.Interfaces;
 
-namespace Core {
-    [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
+namespace SvnToGit.Core {
+    [CastleComponent("SvnToGit.Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
-        private const int MillisecondsTimeout = 1000 * 60 * 60;
         private readonly ILogger logger;
 
         public ProcessCaller(ILogger logger) {
@@ -41,7 +40,7 @@ namespace Core {
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
 
-                process.WaitForExit(MillisecondsTimeout);
+                process.WaitForExit();
             } catch (Win32Exception) {
                 throw new ExecuteFileNotFoundException(fileName);
             }

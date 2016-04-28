@@ -1,9 +1,9 @@
 ﻿using System;
-using CefSharp;
 using System.IO;
 using System.Net;
+using CefSharp;
 
-namespace FrontEnd.BrowserForm {
+namespace SvnToGit.FrontEnd.BrowserForm {
     public class LocalSchemeHandler : IResourceHandler {
         private string mimeType;
         private MemoryStream stream;

@@ -1,6 +1,6 @@
 ﻿using CefSharp;
 
-namespace FrontEnd.BrowserForm {
+namespace SvnToGit.FrontEnd.BrowserForm {
     public class LocalSchemeHandlerFactory : ISchemeHandlerFactory {
         public static string SchemeName { get { return "local"; } }
 

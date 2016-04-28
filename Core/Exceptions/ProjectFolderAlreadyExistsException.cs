@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Exceptions {
+namespace SvnToGit.Core.Exceptions {
     public class ProjectFolderAlreadyExistsException : Exception {
         private const string MessageFormat = "Project folder {0} already exists.";
 

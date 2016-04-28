@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using Core;
-using Core.Exceptions;
-using Core.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using SvnToGit.Core;
+using SvnToGit.Core.Exceptions;
+using SvnToGit.Core.Interfaces;
 
 namespace Test.Core {
     [TestFixture]
@@ -12,6 +12,7 @@ namespace Test.Core {
         private MigrationOrchestrator migrationOrchestrator;
         private ICreateCloneGit createCloneGit;
         private ICreateBareGit createBareGit;
+        private IOpenFolder openFolder;
 
         private const string PathProjectName = "ProjectPath";
         private string FileNameUserFake { get { return Path.GetTempFileName(); } }
@@ -20,11 +21,12 @@ namespace Test.Core {
         public void Setup() {
             createCloneGit = Substitute.For<ICreateCloneGit>();
             createBareGit = Substitute.For<ICreateBareGit>();
+            openFolder = Substitute.For<IOpenFolder>();
 
             if (Directory.Exists(PathProjectName))
                 Directory.Delete(PathProjectName, true);
 
-            migrationOrchestrator = new MigrationOrchestrator(createCloneGit, createBareGit);
+            migrationOrchestrator = new MigrationOrchestrator(createCloneGit, createBareGit, openFolder);
         }
 
         [Test]
@@ -107,6 +109,40 @@ namespace Test.Core {
         [Test]
         public void AbortIfUsersFileNotInformed() {
             Assert.Throws<ArgumentException>(() => migrationOrchestrator.Migrate(string.Empty, string.Empty, PathProjectName));
+        }
+
+        [Test]
+        public void ShouldOpenFolderWhenConcluded() {
+            migrationOrchestrator.Migrate(string.Empty, FileNameUserFake, PathProjectName);
+
+            Received.InOrder(() => {
+                createCloneGit.Create(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+                createBareGit.Create(Arg.Any<string>());
+                openFolder.Folder(PathProjectName);
+            });
+        }
+
+        [Test]
+        public void RetryCloneGitTwoTimesIfCloneErrorWhenCreateCloneGitAndRetry() {
+            createCloneGit.WhenForAnyArgs(c => c.Create(string.Empty, string.Empty, string.Empty))
+                          .Throw<CloneErrorException>();
+
+            migrationOrchestrator.Migrate(string.Empty, FileNameUserFake, PathProjectName, 1);
+
+            createCloneGit.Received(2)
+                          .Create(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+        }
+
+        [Test]
+        public void NotRetryCloneIfNotErrorInClone() {
+            var filenameUsers = FileNameUserFake;
+
+            migrationOrchestrator.Migrate(string.Empty, filenameUsers, PathProjectName, 1);
+
+            var newPathUsersFile = Path.GetFileName(filenameUsers);
+
+            createCloneGit.Received(1)
+                          .Create(Arg.Any<string>(), newPathUsersFile, Arg.Any<string>());
         }
     }
 }

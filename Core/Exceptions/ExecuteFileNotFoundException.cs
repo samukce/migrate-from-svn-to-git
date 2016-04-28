@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Exceptions {
+namespace SvnToGit.Core.Exceptions {
     public class ExecuteFileNotFoundException : Exception {
         private const string MessageFormat = "File execute {0} not found.";
 

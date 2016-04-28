@@ -1,9 +1,9 @@
 ﻿using System;
 using Castle.Core;
-using Core.Interfaces;
+using SvnToGit.Core.Interfaces;
 
-namespace Core {
-    [CastleComponent("Core.CreateBareGit", typeof(ICreateBareGit), Lifestyle = LifestyleType.Singleton)]
+namespace SvnToGit.Core {
+    [CastleComponent("SvnToGit.Core.CreateBareGit", typeof(ICreateBareGit), Lifestyle = LifestyleType.Singleton)]
     public class CreateBareGit : ICreateBareGit {
         private const string FileExecute = "git.exe";
         private const string Arguments = "clone --bare svnclone";

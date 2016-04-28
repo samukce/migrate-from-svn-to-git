@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using Core;
 using NUnit.Framework;
+using SvnToGit.Core;
 
 namespace Test.Core {
     [TestFixture]

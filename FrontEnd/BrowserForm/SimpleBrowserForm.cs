@@ -5,8 +5,8 @@ using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.WinForms.Internals;
 
-namespace FrontEnd.BrowserForm {
-    [CastleComponent("FrontEnd.BrowserForm.SimpleBrowserForm", typeof(INavigator), Lifestyle = LifestyleType.Singleton)]
+namespace SvnToGit.FrontEnd.BrowserForm {
+    [CastleComponent("SvnToGit.FrontEnd.BrowserForm.SimpleBrowserForm", typeof(INavigator), Lifestyle = LifestyleType.Singleton)]
     public partial class SimpleBrowserForm : Form, INavigator {
         private ChromiumWebBrowser browser;
 

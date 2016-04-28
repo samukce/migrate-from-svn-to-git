@@ -14,22 +14,26 @@
             <form id="formMain" class="form-migrate">
                 <h2 class="form-migrate-heading">Migrate SVN to GIT</h2>
 
+                <label for="inputSvnAddress" class="sr-only">SVN Andress (svn://host/project/trunk)</label>
+                <input type="url" id="inputSvnAddress" class="form-control" placeholder="SVN Andress" required autofocus>
+                <br />
+
                 <label for="inputProjectName" class="sr-only">Project name</label>
                 <input type="text" id="inputProjectName" class="form-control" placeholder="Project name" required autofocus>
                 <br />
 
-                <label for="inputSvnAdress" class="sr-only">SVN Andress (svn://host/project/trunk)</label>
-                <input type="url" id="inputSvnAdress" class="form-control" placeholder="SVN Andress" required autofocus>
-                <br />
-
                 <label for="inputUsersFile" class="sr-only">Users' file</label>
                 <input type="text" id="inputUsersFile" class="form-control" placeholder="Users' file" required>
+                <br/>
+                
+                <label for="inputRetry" class="sr-only">Times to retry when occur error</label>
+                <input type="number" id="inputRetry" class="form-control" placeholder="0" value="0">
                 <br />
 
                 <button id="btnSubmit" class="btn btn-lg btn-primary btn-block" type="submit">Run</button>
                 <br />
 
-                <textarea id="logtextarea" cols="40" rows="5"></textarea>
+                <textarea id="logtextarea" cols="40" rows="10"></textarea>
             </form>
         </div>
 
@@ -40,6 +44,8 @@
         function addlog(message) {
             var txt = $("#logtextarea");
             txt.val(txt.val() + "\n" + message);
+
+            txt.scrollTop(txt[0].scrollHeight);
         }
 
         function success() {
@@ -58,17 +64,33 @@
 
         $(function () {
             $("#formMain").submit(function (event) {
-                var svnAdress = $("#inputSvnAdress").val();
+                var svnAdress = $("#inputSvnAddress").val();
                 var usersFile = $("#inputUsersFile").val();
                 var projectName = $("#inputProjectName").val();
+                var retry = parseInt($("#inputRetry").val());
                 
-                bound.execute(svnAdress, usersFile, projectName);
+                bound.execute(svnAdress, usersFile, projectName, retry);
 
                 $("#btnSubmit").attr("disabled", true);
                 event.preventDefault();
             });
 
-            $("#inputSvnAdress").focus();
+            $("#inputSvnAddress").change(function () {
+                var str = $(this).val();
+                var pathArray = str.split('/');
+
+                if (pathArray.length > 2) {
+                    var newPathname = pathArray[pathArray.length - 2];
+
+                    if (pathArray[pathArray.length - 1] === '')
+                        newPathname = pathArray[pathArray.length - 3];
+                    
+                    if (!$("#inputProjectName").val())
+                        $("#inputProjectName").val(newPathname);
+                }
+            });
+
+            $("#inputSvnAddress").focus();
         });
     </script>
 </body>
