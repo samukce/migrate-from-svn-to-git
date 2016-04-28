@@ -15,7 +15,7 @@ See the list of [available releases](https://github.com/samukce/migrate-from-svn
 ## Requirements to use
 
 - Git.exe on path of the Windows
-- .NET Framework 4.6
+- .NET Framework 4.6.1
 
 ## The development of application
 
