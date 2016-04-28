@@ -6,7 +6,7 @@ using SvnToGit.Core.Exceptions;
 using SvnToGit.Core.Interfaces;
 
 namespace SvnToGit.Core {
-    [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
+    [CastleComponent("SvnToGit.Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
         private readonly ILogger logger;
 

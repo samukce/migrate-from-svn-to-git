@@ -3,7 +3,7 @@ using SvnToGit.Core.Interfaces;
 using SvnToGit.FrontEnd.BrowserForm;
 
 namespace SvnToGit.FrontEnd {
-    [CastleComponent("FrontEnd.LoggerBrowser", typeof(ILogger), Lifestyle = LifestyleType.Transient)]
+    [CastleComponent("SvnToGit.FrontEnd.LoggerBrowser", typeof(ILogger), Lifestyle = LifestyleType.Transient)]
     public class LoggerBrowser : ILogger {
         private readonly INavigator navigator;
 

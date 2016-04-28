@@ -24,6 +24,10 @@
 
                 <label for="inputUsersFile" class="sr-only">Users' file</label>
                 <input type="text" id="inputUsersFile" class="form-control" placeholder="Users' file" required>
+                <br/>
+                
+                <label for="inputRetry" class="sr-only">Times to retry when occur error</label>
+                <input type="number" id="inputRetry" class="form-control" placeholder="0" value="0">
                 <br />
 
                 <button id="btnSubmit" class="btn btn-lg btn-primary btn-block" type="submit">Run</button>
@@ -63,8 +67,9 @@
                 var svnAdress = $("#inputSvnAddress").val();
                 var usersFile = $("#inputUsersFile").val();
                 var projectName = $("#inputProjectName").val();
+                var retry = $("#inputRetry").val();
                 
-                bound.execute(svnAdress, usersFile, projectName);
+                bound.execute(svnAdress, usersFile, projectName, retry);
 
                 $("#btnSubmit").attr("disabled", true);
                 event.preventDefault();

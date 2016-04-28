@@ -5,10 +5,11 @@ using SvnToGit.Core.Exceptions;
 using SvnToGit.Core.Interfaces;
 
 namespace SvnToGit.Core {
-    [CastleComponent("Core.CreateCloneGit", typeof(ICreateCloneGit), Lifestyle = LifestyleType.Singleton)]
+    [CastleComponent("SvnToGit.Core.CreateCloneGit", typeof(ICreateCloneGit), Lifestyle = LifestyleType.Singleton)]
     public class CreateCloneGit : ICreateCloneGit {
+        private const string SvnCloneFolder = "svnclone";
         private const string FileExecute = "git.exe";
-        private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata svnclone";
+        private const string Arguments = "svn clone \"{0}\" --authors-file={1} --no-metadata " + SvnCloneFolder;
         private const string FileNameErrorClone = "perl.exe.stackdump";
 
         private readonly IProcessCaller processCaller;
@@ -34,6 +35,8 @@ namespace SvnToGit.Core {
             if (!validateFile.Exist(fileUsersPath))
                 throw new FileUsersNotFoundException(fileUsersPath);
 
+            CreateEmptyFolder(SvnCloneFolder);
+
             var argumentsFormat = string.Format(Arguments, svnUrl, usersAuthorsPathFile);
             processCaller.ExecuteSync(FileExecute, argumentsFormat, projectNameFolder);
 
@@ -44,7 +47,14 @@ namespace SvnToGit.Core {
         }
 
         private string GetFullFileNameError(string projectNameFolder) {
-            return Path.Combine(projectNameFolder, "svnclone", FileNameErrorClone);
+            return Path.Combine(projectNameFolder, SvnCloneFolder, FileNameErrorClone);
+        }
+
+        public virtual void CreateEmptyFolder(string path) {
+            if (Directory.Exists(path))
+                Directory.Delete(path, true);
+
+            Directory.CreateDirectory(path);
         }
     }
 }

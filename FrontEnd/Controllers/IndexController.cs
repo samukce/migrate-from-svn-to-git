@@ -4,7 +4,7 @@ using SvnToGit.Core;
 using SvnToGit.FrontEnd.BrowserForm;
 
 namespace SvnToGit.FrontEnd.Controllers {
-    [CastleComponent("FrontEnd.Controllers.IndexController", Lifestyle = LifestyleType.Transient)]
+    [CastleComponent("SvnToGit.FrontEnd.Controllers.IndexController", Lifestyle = LifestyleType.Transient)]
     public class IndexController {
         private static string HtmlPage { get { return "local://web/index.html"; } }
 
@@ -20,9 +20,9 @@ namespace SvnToGit.FrontEnd.Controllers {
             navigator.LoadUrl(HtmlPage, this);
         }
 
-        public void Execute(string svnAdress, string usersFile, string projectName) {
+        public void Execute(string svnAdress, string usersFile, string projectName, int retry) {
             try {
-                migrationOrchestrator.Migrate(svnAdress, usersFile, projectName);
+                migrationOrchestrator.Migrate(svnAdress, usersFile, projectName, retry);
 
                 SuccessMigrate();
 

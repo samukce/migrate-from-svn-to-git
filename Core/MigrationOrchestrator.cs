@@ -5,7 +5,7 @@ using SvnToGit.Core.Exceptions;
 using SvnToGit.Core.Interfaces;
 
 namespace SvnToGit.Core {
-    [CastleComponent("Core.MigrationOrchestrator", Lifestyle = LifestyleType.Singleton)]
+    [CastleComponent("SvnToGit.Core.MigrationOrchestrator", Lifestyle = LifestyleType.Singleton)]
     public class MigrationOrchestrator {
         private readonly ICreateBareGit createBareGit;
         private readonly IOpenFolder openFolder;
@@ -29,21 +29,28 @@ namespace SvnToGit.Core {
             var fileNameUsers = Path.GetFileName(usersAuthorsFullPathFile);
             CopyUserFileToProjectFolder(usersAuthorsFullPathFile, projectNameFolder, fileNameUsers);
 
-            var countClone = 0;
-            do {
-                try {
-                    createCloneGit.Create(svnUrl, fileNameUsers, projectNameFolder);
-                } catch (CloneErrorException) {
-
-                }
-            } while (countClone++ < retryTimes);
+            ExecuteCloneWithRetry(svnUrl, projectNameFolder, fileNameUsers, retryTimes);
 
             createBareGit.Create(projectNameFolder);
             openFolder.Folder(projectNameFolder);
         }
 
-        private static void CopyUserFileToProjectFolder(string usersAuthorsFullPathFile, string projectNameFolder,
-            string fileNameUsers) {
+        private void ExecuteCloneWithRetry(string svnUrl, string projectNameFolder, string fileNameUsers, int retryTimes) {
+            var countClone = 0;
+            var success = false;
+
+            do {
+
+                try {
+                    createCloneGit.Create(svnUrl, fileNameUsers, projectNameFolder);
+                    success = true;
+                } catch (CloneErrorException) {
+                }
+
+            } while (!success && (countClone++ < retryTimes));
+        }
+
+        private static void CopyUserFileToProjectFolder(string usersAuthorsFullPathFile, string projectNameFolder, string fileNameUsers) {
             File.Copy(usersAuthorsFullPathFile, Path.Combine(projectNameFolder, fileNameUsers));
         }
 

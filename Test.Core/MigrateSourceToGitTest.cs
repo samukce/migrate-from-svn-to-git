@@ -132,5 +132,17 @@ namespace Test.Core {
             createCloneGit.Received(2)
                           .Create(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
         }
+
+        [Test]
+        public void NotRetryCloneIfNotErrorInClone() {
+            var filenameUsers = FileNameUserFake;
+
+            migrationOrchestrator.Migrate(string.Empty, filenameUsers, PathProjectName, 1);
+
+            var newPathUsersFile = Path.GetFileName(filenameUsers);
+
+            createCloneGit.Received(1)
+                          .Create(Arg.Any<string>(), newPathUsersFile, Arg.Any<string>());
+        }
     }
 }

@@ -87,5 +87,40 @@ namespace Test.Core {
 
             createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
         }
+
+        [Test]
+        public void ShouldToDeleteSvnCloneFolderWhenCallCreateClone() {
+            createCloneGit = Substitute.ForPartsOf<CreateCloneGit>(processCaller, validateFile);
+
+            validateFile.Exist("projectName\\users.txt")
+                        .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(false);
+
+            createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
+
+            createCloneGit.Received(1)
+                          .CreateEmptyFolder("svnclone");
+        }
+
+
+        [Test]
+        public void ShouldFirstCallCreateFolderAndThanCloneFromSvn() {
+            createCloneGit = Substitute.ForPartsOf<CreateCloneGit>(processCaller, validateFile);
+
+            validateFile.Exist("projectName\\users.txt")
+                        .Returns(true);
+
+            validateFile.Exist("projectName\\svnclone\\perl.exe.stackdump")
+                        .Returns(false);
+
+            createCloneGit.Create("https://svn.com/project/svn", "users.txt", "projectName");
+
+            Received.InOrder(() => {
+                createCloneGit.CreateEmptyFolder("svnclone");
+                processCaller.ExecuteSync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+            });
+        }
     }
 }
