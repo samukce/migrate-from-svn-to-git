@@ -3,10 +3,10 @@ using System.Windows.Forms;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using CefSharp;
-using FrontEnd.BrowserForm;
-using FrontEnd.Controllers;
+using SvnToGit.FrontEnd.BrowserForm;
+using SvnToGit.FrontEnd.Controllers;
 
-namespace FrontEnd {
+namespace SvnToGit.FrontEnd {
     static class Program {
         private static IWindsorContainer container;
 

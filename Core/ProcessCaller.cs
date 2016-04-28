@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using Castle.Core;
-using Core.Exceptions;
-using Core.Interfaces;
+using SvnToGit.Core.Exceptions;
+using SvnToGit.Core.Interfaces;
 
-namespace Core {
+namespace SvnToGit.Core {
     [CastleComponent("Core.ProcessCaller", typeof(IProcessCaller), Lifestyle = LifestyleType.Singleton)]
     public class ProcessCaller : IProcessCaller {
         private readonly ILogger logger;

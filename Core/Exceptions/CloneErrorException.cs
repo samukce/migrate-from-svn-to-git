@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Exceptions {
+namespace SvnToGit.Core.Exceptions {
     public class CloneErrorException : Exception {
     }
 }

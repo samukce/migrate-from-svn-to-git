@@ -1,8 +1,8 @@
 ﻿using Castle.Core;
-using Core.Interfaces;
-using FrontEnd.BrowserForm;
+using SvnToGit.Core.Interfaces;
+using SvnToGit.FrontEnd.BrowserForm;
 
-namespace FrontEnd {
+namespace SvnToGit.FrontEnd {
     [CastleComponent("FrontEnd.LoggerBrowser", typeof(ILogger), Lifestyle = LifestyleType.Transient)]
     public class LoggerBrowser : ILogger {
         private readonly INavigator navigator;

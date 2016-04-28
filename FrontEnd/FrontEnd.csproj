@@ -9,8 +9,8 @@
     <ProjectGuid>{6D0CA45A-A496-4925-8138-5A6A4717C95E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FrontEnd</RootNamespace>
-    <AssemblyName>FrontEnd</AssemblyName>
+    <RootNamespace>SvnToGit.FrontEnd</RootNamespace>
+    <AssemblyName>SvnToGit.FrontEnd</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

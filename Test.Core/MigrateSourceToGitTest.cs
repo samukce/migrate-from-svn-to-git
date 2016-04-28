@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using Core;
-using Core.Exceptions;
-using Core.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using SvnToGit.Core;
+using SvnToGit.Core.Exceptions;
+using SvnToGit.Core.Interfaces;
 
 namespace Test.Core {
     [TestFixture]
@@ -120,6 +120,17 @@ namespace Test.Core {
                 createBareGit.Create(Arg.Any<string>());
                 openFolder.Folder(PathProjectName);
             });
+        }
+
+        [Test]
+        public void RetryCloneGitTwoTimesIfCloneErrorWhenCreateCloneGitAndRetry() {
+            createCloneGit.WhenForAnyArgs(c => c.Create(string.Empty, string.Empty, string.Empty))
+                          .Throw<CloneErrorException>();
+
+            migrationOrchestrator.Migrate(string.Empty, FileNameUserFake, PathProjectName, 1);
+
+            createCloneGit.Received(2)
+                          .Create(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
         }
     }
 }

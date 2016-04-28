@@ -1,7 +1,7 @@
 ﻿using Castle.MicroKernel.Facilities;
 using Castle.MicroKernel.Registration;
 
-namespace FrontEnd {
+namespace SvnToGit.FrontEnd {
     public class Facility : AbstractFacility {
         protected override void Init() {
             Kernel.Register(Types.FromThisAssembly()

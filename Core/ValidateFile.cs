@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using Castle.Core;
-using Core.Interfaces;
+using SvnToGit.Core.Interfaces;
 
-namespace Core {
+namespace SvnToGit.Core {
     [CastleComponent("Core.ValidateFile", typeof(IValidateFile), Lifestyle = LifestyleType.Singleton)]
     public class ValidateFile : IValidateFile {
         public bool Exist(string fullPath) {

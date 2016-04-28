@@ -1,8 +1,8 @@
 ﻿using System;
-using Core;
-using Core.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using SvnToGit.Core;
+using SvnToGit.Core.Interfaces;
 
 namespace Test.Core {
     [TestFixture]

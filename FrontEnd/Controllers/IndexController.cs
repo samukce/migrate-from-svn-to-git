@@ -1,9 +1,9 @@
 ﻿using System;
 using Castle.Core;
-using Core;
-using FrontEnd.BrowserForm;
+using SvnToGit.Core;
+using SvnToGit.FrontEnd.BrowserForm;
 
-namespace FrontEnd.Controllers {
+namespace SvnToGit.FrontEnd.Controllers {
     [CastleComponent("FrontEnd.Controllers.IndexController", Lifestyle = LifestyleType.Transient)]
     public class IndexController {
         private static string HtmlPage { get { return "local://web/index.html"; } }

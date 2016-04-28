@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using Castle.Core;
-using Core.Interfaces;
+using SvnToGit.Core.Interfaces;
 
-namespace Core {
+namespace SvnToGit.Core {
     [CastleComponent("Core.OpenFolder", typeof(IOpenFolder), Lifestyle = LifestyleType.Singleton)]
     public class OpenFolder : IOpenFolder {
         public void Folder(string path) {

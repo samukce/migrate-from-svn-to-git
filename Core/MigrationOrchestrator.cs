@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using Castle.Core;
-using Core.Exceptions;
-using Core.Interfaces;
+using SvnToGit.Core.Exceptions;
+using SvnToGit.Core.Interfaces;
 
-namespace Core {
+namespace SvnToGit.Core {
     [CastleComponent("Core.MigrationOrchestrator", Lifestyle = LifestyleType.Singleton)]
     public class MigrationOrchestrator {
         private readonly ICreateBareGit createBareGit;
@@ -17,7 +17,7 @@ namespace Core {
             this.openFolder = openFolder;
         }
 
-        public void Migrate(string svnUrl, string usersAuthorsFullPathFile, string projectNameFolder) {
+        public void Migrate(string svnUrl, string usersAuthorsFullPathFile, string projectNameFolder, int retryTimes = 0) {
             if (string.IsNullOrWhiteSpace(usersAuthorsFullPathFile))
                 throw new ArgumentException("usersAuthorsFullPathFile");
 
@@ -29,7 +29,15 @@ namespace Core {
             var fileNameUsers = Path.GetFileName(usersAuthorsFullPathFile);
             CopyUserFileToProjectFolder(usersAuthorsFullPathFile, projectNameFolder, fileNameUsers);
 
-            createCloneGit.Create(svnUrl, fileNameUsers, projectNameFolder);
+            var countClone = 0;
+            do {
+                try {
+                    createCloneGit.Create(svnUrl, fileNameUsers, projectNameFolder);
+                } catch (CloneErrorException) {
+
+                }
+            } while (countClone++ < retryTimes);
+
             createBareGit.Create(projectNameFolder);
             openFolder.Folder(projectNameFolder);
         }
