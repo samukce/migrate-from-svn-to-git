@@ -35,3 +35,5 @@ So I took to learn more about the Chromium browser with manipulation of C# objec
 ## License
 
 MIT License
+
+https://ci.appveyor.com/api/projects/status/github/samukce/migrate-from-svn-to-git
