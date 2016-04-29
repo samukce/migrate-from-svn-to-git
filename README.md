@@ -1,5 +1,7 @@
 # Migrate SVN to Git
 
+![Build Status](https://ci.appveyor.com/api/projects/status/github/samukce/migrate-from-svn-to-git?branch=master&svg=true)
+
 Simple automation to migrate projects from Subversion (SVN) to GIT with complete historical.
 
 This is how it looks like:
@@ -35,5 +37,3 @@ So I took to learn more about the Chromium browser with manipulation of C# objec
 ## License
 
 MIT License
-
-[![Build Status](https://ci.appveyor.com/api/projects/status/github/samukce/migrate-from-svn-to-git?branch=master&svg=true)]
